@@ -2,17 +2,17 @@ package routes
 
 import (
 	"github.com/gin-gonic/gin"
-	"net/http"
-	"time"
+	"jin-gin/app/controllers/app"
+	"jin-gin/app/services"
+	"jin-gin/middleware"
 )
 
 func SetApiGroupRoutes(routes *gin.RouterGroup) {
-	routes.GET("ping", func(context *gin.Context) {
-		context.String(http.StatusOK, "pong")
-	})
-	routes.GET("/test", func(c *gin.Context) {
-		time.Sleep(15 * time.Second)
-		c.String(http.StatusOK, "success")
-	})
+	routes.POST("/auth/register", app.Register)
+	routes.POST("/auth/login", app.Login)
+	authRoutes := routes.Group("").Use(middleware.JWTAuth(services.AppGuardName))
+	{
+		authRoutes.GET("/auth/info", app.AuthInfo)
+	}
 
 }

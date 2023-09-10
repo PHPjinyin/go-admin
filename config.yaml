@@ -29,3 +29,7 @@ database:
   enable_file_log_writer:  # 是否启用日志文件
   log_filename: sql.log # 日志文件名称
 
+jwt:
+  secret: EOlFtb4BZTJkjOXjIvGa2kEfKlYF8iDuRHRJamL6ijjYKZ16Ax2X0nxN3le4lm8K
+  jwt_ttl: 86400
+
