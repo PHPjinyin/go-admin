@@ -1,6 +1,7 @@
 package config
 
 type Configuration struct {
-	App App `mapstructure:"app" json:"app" yaml:"app"`
-	Log Log `mapstructure:"Log" json:"Log" yaml:"Log"`
+	App      App      `mapstructure:"app" json:"app" yaml:"app"`
+	Log      Log      `mapstructure:"Log" json:"Log" yaml:"Log"`
+	Database Database `mapstructure:"database" json:"database" yaml:"database"`
 }

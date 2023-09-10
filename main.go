@@ -1,10 +1,8 @@
 package main
 
 import (
-	"github.com/gin-gonic/gin"
 	"jin-gin/bootstrap"
 	"jin-gin/global"
-	"net/http"
 )
 
 func main() {
@@ -12,16 +10,16 @@ func main() {
 	bootstrap.InitializeConfig()
 	// 初始化日志
 	bootstrap.InitializeLog()
+	// 初始化数据库
+	global.App.DB = bootstrap.InitializeDB()
+	// 程序关闭前，释放数据库连接
+	defer func() {
+		if global.App.DB != nil {
+			db, _ := global.App.DB.DB()
+			db.Close()
+		}
+	}()
 
 	global.App.Log.Info("log init success!")
-
-	r := gin.Default()
-
-	// 测试路由
-	r.GET("/ping", func(c *gin.Context) {
-		c.JSON(http.StatusOK, "pong")
-	})
-
-	// 启动服务器
-	r.Run(":" + global.App.Config.App.Port)
+	bootstrap.RunServer()
 }
