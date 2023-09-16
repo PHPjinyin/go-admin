@@ -2,6 +2,7 @@ package app
 
 import (
 	"github.com/gin-gonic/gin"
+	"github.com/golang-jwt/jwt/v5"
 	"jin-gin/app/common/request"
 	"jin-gin/app/common/response"
 	"jin-gin/app/services"
@@ -34,4 +35,13 @@ func AuthInfo(c *gin.Context) {
 		return
 	}
 	response.Success(c, user)
+}
+
+func Logout(c *gin.Context) {
+	err := services.JwtServices.JoinBlackList(c.Keys["token"].(*jwt.Token))
+	if err != nil {
+		response.BusinessFail(c, "登出失败")
+		return
+	}
+	response.Success(c, nil)
 }

@@ -13,6 +13,7 @@ func SetApiGroupRoutes(routes *gin.RouterGroup) {
 	authRoutes := routes.Group("").Use(middleware.JWTAuth(services.AppGuardName))
 	{
 		authRoutes.GET("/auth/info", app.AuthInfo)
+		authRoutes.GET("/auth/logout", app.Logout)
 	}
 
 }

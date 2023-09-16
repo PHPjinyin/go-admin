@@ -5,4 +5,5 @@ type Configuration struct {
 	Log      Log      `mapstructure:"Log" json:"Log" yaml:"Log"`
 	Database Database `mapstructure:"database" json:"database" yaml:"database"`
 	Jwt      Jwt      `mapstructure:"jwt" json:"jwt" yaml:"jwt"`
+	Redis    Redis    `mapstructure:"redis" json:"redis" yaml:"redis"`
 }

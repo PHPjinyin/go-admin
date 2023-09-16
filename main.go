@@ -14,6 +14,8 @@ func main() {
 	global.App.DB = bootstrap.InitializeDB()
 	// 初始化校验函数
 	bootstrap.InitializeValidator()
+	// 初始化 Redis
+	bootstrap.InitializeRedis()
 	// 程序关闭前，释放数据库连接
 	defer func() {
 		if global.App.DB != nil {
